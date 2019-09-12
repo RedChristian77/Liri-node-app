@@ -1,17 +1,20 @@
 require("dotenv").config();
-
+let axios = require("axios");
 var keys = require("./keys.js");
+let Spotify = require("node-spotify-api");
 
 var spotify = new Spotify(keys.spotify);
 
-let process1 = process.argv[2]
+let process1 = process.argv[2];
+let process2 = process.argv[3];
 
 let searchs = function(activity, search){
+
     if(activity === "concert-this"){
         concert_this(search);
     }
     else if(activity === "spotify-this-song"){
-        spotify(search);
+        spotify_song(search);
     }
     else if(activity === "movie-this"){
         movieFunction(search);
@@ -32,17 +35,48 @@ let searchs = function(activity, search){
 }
 
 let concert_this = function(concertname) {
-
+    let artist = concertname;
+    console.log("Loading your Request");
+    console.log("---------------------");
+    axios("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(function(response){
+        console.log("Venue: " + response.data[0].venue.name);
+        console.log("Location: " + response.data[0].venue.city + "," + response.data[0].venue.country);
+    }).catch(function (error){
+        console.log("Their was an error with your request");
+    })
 }
 
-let spotify = function(song){
-
+let spotify_song = function(song){
+    let title = song.replace(/\s+/g, "%");
+    console.log(title);
+    spotify
+    .request('https://api.spotify.com/v1/search?q='+ title+"&type=track&market=US")
+    .then(function(data) {
+        console.log(data);
+    })
+    .catch(function(err) {
+        console.error("error occurred: " + err);
+    })
 }
 
 let movieFunction = function(movie){
-
+    let movieName = movie.replace(/\s+/g, "+");
+    axios("http://www.omdbapi.com/?apikey=trilogy&t="+movie).then(function(response){
+        console.log("-------------------------------------------------------------------------------");
+        console.log("Title: " + response.data.Title);
+        console.log("Release Year: " + response.data.Year);
+        console.log("IMBD Rating: " + response.data.imdbRating);
+        console.log("Rotten Tomatoes Score: " + response.data.Ratings[1].Value);
+        console.log("Country Produced: " + response.data.Country);
+        console.log("Language : " + response.data.Language);
+        console.log("Plot: " + response.data.Plot);
+        console.log("Actors: " + response.data.Actors);
+        console.log("--------------------------------------------------------------------------------");
+    })
 }
 
 let dowWhatItSays = function(){
 
 }
+
+searchs(process1,process2);
