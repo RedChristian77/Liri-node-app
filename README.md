@@ -6,10 +6,11 @@ The use of this project is used to do a query to 3 different API's (My Band API,
 ## Selectors
 #### Concert-this
 - This is used to find the newest concert of the band selected. It will send back the information of the location and venue of the bands most upcoming concert
-
+-Img Link: https://github.com/RedChristian77/Liri-node-app/blob/master/Images/Concert-this-image.png
 
 ### spotify-this-song
 - This command is used to find the songs artist, album it is on, as well as a link to the song.
+-Img link: https://github.com/RedChristian77/Liri-node-app/blob/master/Images/spotify-this-song.png
 
 ### Movie-This
 - This command is used to find the information of a movie in the search and send back to the results of:  
@@ -21,4 +22,11 @@ The use of this project is used to do a query to 3 different API's (My Band API,
   -Language of the movie.  
   -Short plot of the movie.  
   -Actors in the movie.
-  
+-Img Link: https://github.com/RedChristian77/Liri-node-app/blob/master/Images/movie-this.png
+
+### Do-what-it-says
+-This command is used to search up the first save stored on the random.txt file, which in this case is searching Backstreet boys I want it that way.
+-Img Link: https://github.com/RedChristian77/Liri-node-app/blob/master/Images/do-what-it-says.png
+
+
+Any comments or questions please email me at Christian.d.breyer@outlook.com
