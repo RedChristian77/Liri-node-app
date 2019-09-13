@@ -2,6 +2,7 @@ require("dotenv").config();
 let axios = require("axios");
 var keys = require("./keys.js");
 let Spotify = require("node-spotify-api");
+let fs = require("fs");
 
 var spotify = new Spotify(keys.spotify);
 
@@ -9,6 +10,12 @@ let process1 = process.argv[2];
 let process2 = process.argv[3];
 
 let searchs = function(activity, search){
+    let saveSearch = "\n" +activity + "," + search;
+    fs.appendFile("random.txt",saveSearch,function(err){
+        if(err){
+            console.log(err);
+        }
+    })
 
     if(activity === "concert-this"){
         concert_this(search);
@@ -81,7 +88,14 @@ let movieFunction = function(movie){
 }
 
 let dowWhatItSays = function(){
-    
+    fs.readFile("random.txt", "utf8", function(error,data) {
+        if(error){
+            return console.log(error)
+        }
+        let dataInfo = data.split(",");
+        searchs(dataInfo[0],dataInfo[1]);
+    })
+
 }
 
 searchs(process1,process2);
