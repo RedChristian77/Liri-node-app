@@ -10,7 +10,7 @@ let process1 = process.argv[2];
 let process2 = process.argv[3];
 
 let searchs = function(activity, search){
-    let saveSearch = "\n" +activity + "," + search;
+    let saveSearch = "\n" +activity + "," + search + ",";
     fs.appendFile("random.txt",saveSearch,function(err){
         if(err){
             console.log(err);

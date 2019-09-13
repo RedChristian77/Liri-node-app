@@ -1,2 +1,5 @@
-spotify-this-song,"I Want it That Way"
-spotify-this-song,all the small things
+spotify-this-song,"I Want it That Way",
+do-what-it-says,undefined,
+spotify-this-song,"I Want it That Way",
+do-what-it-says,undefined,
+spotify-this-song,"I Want it That Way",
