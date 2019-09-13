@@ -47,15 +47,20 @@ let concert_this = function(concertname) {
 }
 
 let spotify_song = function(song){
-    let title = song.replace(/\s+/g, "%");
-    console.log(title);
-    spotify
-    .request('https://api.spotify.com/v1/search?q='+ title+"&type=track&market=US")
-    .then(function(data) {
-        console.log(data);
-    })
-    .catch(function(err) {
-        console.error("error occurred: " + err);
+    spotify.search({ type: 'track', query: song}, function(err,data){
+        if(err){
+            return console.log("Error occurred:" + err);
+        }
+        console.log("---------------------------------------------------------------");
+        let artistsString = "";
+        data.tracks.items[0].artists.forEach(element => {
+            artistsString += element.name + ", ";
+        });
+        console.log("Artist(s): " + artistsString);
+        console.log("Song Name: " + data.tracks.items[0].name);
+        console.log("Link Preview: " + data.tracks.items[0].external_urls.spotify);
+        console.log("From Album: " + data.tracks.items[0].album.name)
+        console.log("--------------------------------------------------------------------------")
     })
 }
 
@@ -76,7 +81,7 @@ let movieFunction = function(movie){
 }
 
 let dowWhatItSays = function(){
-
+    
 }
 
 searchs(process1,process2);
